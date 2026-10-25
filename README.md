@@ -18,13 +18,20 @@
 
 ## 📌 Overview
 
-Query live endpoint data using SQL. Collect
+
+OSight is an endpoint-visibility and SQL query engine that lets you interrogate live host data using ordinary SQL. It collects process, port, user, file, network and system intelligence for purple-team exercises and incident response. A --list-tables helper and an offline --self-test sandbox make it easy to explore the schema and verify behaviour without touching production.
 
 ---
 
 ## ✨ Features
 
-- Endpoint visibility via SQL — processes, ports, users, files & offline self-test
+
+- Query live endpoint state (processes, ports, users, files, network, system info) with SQL
+- --snapshot mode to capture a point-in-time view of the host
+- --list-tables to discover the queryable schema before writing SQL
+- Configurable output directory and --no-color for piped / logged output
+- Offline --self-test sandbox for safe verification
+- Uses psutil when available and degrades gracefully when it is not
 
 ---
 
@@ -37,8 +44,13 @@ Query live endpoint data using SQL. Collect
 
 ## 🚀 Usage
 
+
 ```bash
-./OSight
+./OSight --list-tables
+./OSight -q "SELECT pid, name FROM processes WHERE name LIKE '%ssh%'"
+./OSight --snapshot --output-dir ./evidence
+./OSight --self-test
+./OSight --help
 ```
 
 ---
